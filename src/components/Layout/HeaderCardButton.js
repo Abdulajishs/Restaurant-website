@@ -1,11 +1,10 @@
-import React, { Fragment } from "react";
+import React from "react";
 import CartIcon from "../Card/CardIcon";
 
 import classes from "./HeaderCardButton.module.css"
 
 const HeaderCardButton = (props) =>{
     return(
-        <Fragment>
             <button className={classes.button}> 
                 <span className={classes.icon}>
                     <CartIcon/>
@@ -15,7 +14,6 @@ const HeaderCardButton = (props) =>{
                     3
                 </span>
             </button>
-        </Fragment>
     )
 }
 
