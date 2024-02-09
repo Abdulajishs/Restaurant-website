@@ -1,5 +1,5 @@
 import React from "react";
-import CartIcon from "../Card/CardIcon";
+import CartIcon from "../Cart/CartIcon";
 
 import classes from "./HeaderCardButton.module.css"
 
