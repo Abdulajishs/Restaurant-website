@@ -1,44 +1,56 @@
-import { useContext, useState } from "react"
-import Input from "../UI/Input";
+import { useContext} from "react"
+// import Input from "../UI/Input";
 import CartContext from "../../store/cart-context";
+import classes from "./CartItem.module.css"
 
-const CartItem = ({item}) =>{
+const CartItem = (props) => {
+
+    const { item } = props;
 
     const cartcntx = useContext(CartContext)
 
-    const [enteredValue,setEnteredValue] = useState(item.quantity);
+    // const [enteredValue, setEnteredValue] = useState(item.quantity);
 
-    const onChangeHandler = (event) =>{
-        setEnteredValue(event.target.value);
-    }
+    // const onChangeHandler = (event) => {
+    //     setEnteredValue(event.target.value);
+    // }
 
     const addItemToCart = (event) => {
         event.preventDefault();
-        cartcntx.addItem({...item,quantity : 1});
+        cartcntx.addItem({ ...item, quantity: 1 });
     }
 
-    const removeItemFromcart = (event) =>{
+    const removeItemFromcart = (event) => {
         event.preventDefault();
-        cartcntx.removeItem({...item,quantity : 1})
+        cartcntx.removeItem({ ...item, quantity: 1 })
     }
 
-    return <div>
-            <li key={item.id}>
+    return (
+        <li key={item.id} className={classes['cart-item']}>
+            <div>
                 <h2>{item.name}</h2>
-                <h3>{item.price} </h3>
-                <Input input={{
-                    id: "amount__" + item.id,
-                    type: "number",
-                    min: 1,
-                    max: 5,
-                    step: 1,
-                    value:  item.quantity,
-                    onChange:onChangeHandler
-                }}/>
+                <div className={classes.summary}>
+                    <span className={classes.price}>{item.price} </span>
+                    <span className={classes.amount}>x {item.quantity}</span>
+                    {/* <span className={classes.amount}>
+                        <Input input={{
+                            id: "amount__" + item.id,
+                            type: "number",
+                            min: 0,
+                            max: 5,
+                            step: 1,
+                            value: item.quantity,
+                            onChange: onChangeHandler
+                        }} />
+                    </span> */}
+                </div>
+            </div>
+            <div className={classes.actions}>
                 <button onClick={removeItemFromcart} >-</button>
                 <button onClick={addItemToCart}>+</button>
-            </li>
             </div>
+        </li>
+    )
 }
 
 export default CartItem

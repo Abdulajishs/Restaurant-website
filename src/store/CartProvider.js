@@ -5,24 +5,29 @@ const CartProvider = (props) => {
     const [enteredItems,setEnteredItems]=useState([]);
 
     const addItemsToCartHandler = (item) => {
-        const existingItemIndex = enteredItems.findIndex( (index) => index.id === item.id )
+        const existingItemIndex = enteredItems.findIndex( (ele) => ele.id === item.id )
+        
         if(existingItemIndex !== -1 ){
             const updatedItem = [...enteredItems];
             updatedItem[existingItemIndex].quantity = Number(updatedItem[existingItemIndex].quantity) + Number(item.quantity) ;
             setEnteredItems(updatedItem)
+            console.log( enteredItems[existingItemIndex].quantity);
         }else{
             setEnteredItems((prevItems)=>[...prevItems,item]);
         }
     };
 
     const removeItemsFromCartHandler = (item) => {
-        const existingItemIndex = enteredItems.findIndex( (index) => index.id === item.id )
+        const existingItemIndex = enteredItems.findIndex( (ele) => ele.id === item.id )
+        
         if(existingItemIndex !== -1 ){
             const updatedItem = [...enteredItems];
             updatedItem[existingItemIndex].quantity = Number(updatedItem[existingItemIndex].quantity) - Number(item.quantity) ;
+            if(updatedItem[existingItemIndex].quantity <=0){
+                updatedItem.splice(existingItemIndex,1)
+            }
             setEnteredItems(updatedItem)
-        }else{
-            setEnteredItems((prevItems)=>[...prevItems,item]);
+            console.log( enteredItems[existingItemIndex].quantity);
         }
     }
 
